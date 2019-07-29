@@ -1,0 +1,11 @@
+version: '3'
+services:
+  drawers_psql_db:
+    build: ./DigitalTable.Persistence
+    ports:
+      - '5432:5432'
+    environment:
+      - PROD_DB
+      - DEV_DB
+      - TEST_DB
+      
