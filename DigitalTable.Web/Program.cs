@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using DigitalTable.Persistence;
 
 namespace DigitalTable.Web
@@ -20,15 +21,14 @@ namespace DigitalTable.Web
 
 			using (var scope = host.Services.CreateScope())
 			{
-				var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 				try
 				{
-					var pgConnection = scope.ServiceProvider.GetService<PgConnection>();
-					var migrator = new Migrator(logger, pgConnection.Connection);
-					migrator.Migrate();
+					var context = scope.ServiceProvider.GetService<DigitalTableDbContext>();
+					context.Database.Migrate();
 				}
 				catch (Exception ex)
 				{
+					var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 					logger.LogError(ex, "An error occurred while migrating or initializing the database.");
 				}
 			}

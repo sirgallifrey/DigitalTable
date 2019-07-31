@@ -8,4 +8,3 @@ services:
       - PROD_DB
       - DEV_DB
       - TEST_DB
-      

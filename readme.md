@@ -4,7 +4,7 @@
 
 or on detached mode
 
-	docker-compose up -D
+	docker-compose up -d
 
 ## stop DB
 
