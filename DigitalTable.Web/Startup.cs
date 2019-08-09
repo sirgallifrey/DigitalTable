@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DigitalTable.Persistence;
 using Microsoft.OpenApi.Models;
-
+using DigitalTable.Web.Services;
+using AutoMapper;
+using DigitalTable.Web.Converters;
 
 namespace DigitalTable.Web
 {
@@ -25,7 +27,13 @@ namespace DigitalTable.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services.AddMvc()
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+				.AddJsonOptions(options =>
+					{
+						options.SerializerSettings.Converters.Add(new OneOfJsonConverter());
+					}
+				);
 
 			services.AddEntityFrameworkNpgsql()
 				.AddDbContext<DigitalTableDbContext>(options =>
@@ -43,6 +51,8 @@ namespace DigitalTable.Web
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "DigitalTable API", Version = "v1" });
 			});
+			services.AddAutoMapper(typeof(Startup));
+			services.AddTransient<ICharacterService, CharacterService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DigitalTable.Persistence.Migrations
 {
     [DbContext(typeof(DigitalTableDbContext))]
-    [Migration("20190731214840_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190807190042_CreateEntities")]
+    partial class CreateEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

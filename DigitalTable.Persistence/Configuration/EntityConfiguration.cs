@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using DigitalTable.Domain.Entities;
+using DigitalTable.Persistence.Infrastructure;
+using Newtonsoft.Json;
 
 namespace DigitalTable.Persistence.Configurations
 {
@@ -8,6 +10,10 @@ namespace DigitalTable.Persistence.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Entity> builder)
 		{
+			var jsonSerializerSettings = new JsonSerializerSettings {
+				Converters = { new OneOfJsonConverter() }
+			};
+
 			builder.ToTable("entities");
 
 			builder.HasKey(e => e.Id);
@@ -30,7 +36,13 @@ namespace DigitalTable.Persistence.Configurations
 
 			builder.Property(e => e.Properties)
 				.HasColumnName("properties")
-				.HasColumnType("jsonb");
+				.HasColumnType("jsonb")
+				.HasConversion(
+					e => JsonConvert.SerializeObject(e,
+						jsonSerializerSettings
+					),
+					e => JsonConvert.DeserializeObject(e)
+				);
 
 			builder.Property(e => e.CreatedAt)
 				.HasColumnName("created_at")

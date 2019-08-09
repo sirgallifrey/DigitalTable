@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DigitalTable.Domain.Entities;
-using DigitalTable.Persistence;
-using Microsoft.EntityFrameworkCore;
 using DigitalTable.Web.Models.Character;
+using DigitalTable.Web.Services;
 
 
 namespace DigitalTable.Web.Controllers
@@ -15,18 +14,19 @@ namespace DigitalTable.Web.Controllers
 	[ApiController]
 	public class CharacterController : Controller
 	{
-		private DigitalTableDbContext _context;
-		public CharacterController(DigitalTableDbContext context)
+		private ICharacterService _characterService;
+		//private IEntityConverter _entityConverter;
+		
+		public CharacterController(ICharacterService characterService/* , IEntityConverter entityConverter*/)
 		{
-			_context = context;
+			_characterService = characterService;
+			//_entityConverter = entityConverter;
 		}
 
 		[HttpGet]
 		public async Task<ActionResult<List<Entity>>> GetCharacters()
 		{
-			var entity = await _context.Entities
-				.Where(e => e.Type == EntityType.Character)
-				.ToListAsync();
+			var entity = await _characterService.GetCharacters();
 
 			if (entity == null)
 			{
@@ -39,9 +39,7 @@ namespace DigitalTable.Web.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Entity>> GetEntityById(int id)
 		{
-			var entity = await _context.Entities
-				.Where(e => e.Type == EntityType.Character && e.Id == id)
-				.FirstOrDefaultAsync();
+			var entity = await _characterService.GetCharacter(id);
 
 			if (entity == null)
 			{
@@ -52,12 +50,23 @@ namespace DigitalTable.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<Entity>> PostEntity(CreateCharacterModel character)
+		public async Task<ActionResult<Entity>> CreateEntity(UpsertCharacter character)
 		{
-			var entity = character.ToEntity();
-			_context.Entities.Add(entity);
-			await _context.SaveChangesAsync();
+			var entity = await _characterService.CreateCharacter(character);
 			return CreatedAtAction(nameof(GetEntityById), new { id = entity.Id }, entity);
+		}
+
+		[HttpPut("{id}")]
+		public async Task<ActionResult<Entity>> UpdateEntity(int id, UpsertCharacter character)
+		{
+			var entity = await _characterService.UpdateCharacter(id, character);
+
+			if (entity == null)
+			{
+				return NotFound();
+			}
+
+			return entity;
 		}
 	}
 }
