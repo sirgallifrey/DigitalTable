@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": [
+			"es2015",
+			"dom",
+			"es6"
+		],
+		"jsx": "react",
+		"rootDir": "../",
+		"baseUrl": "../",
+		"outDir": "./dist",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": false,
+		"strictNullChecks": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"sourceMap": true,
+		"inlineSources": true,
+		"allowJs": true
+	},
+	"exclude": [
+		"node_modules", "dist"
+	],
+	"include": [
+		"./src/**/*"
+	]
+}
