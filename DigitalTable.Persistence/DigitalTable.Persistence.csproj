@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalTable.Domain\DigitalTable.Domain.csproj" />
+	<ProjectReference Include="..\DigitalTable.Infrastructure\DigitalTable.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Digitaltable.Web/bin/Debug/netcoreapp2.2/digitaltable.dll",
+            "program": "${workspaceFolder}/DigitalTable.Web/bin/Debug/netcoreapp2.2/DigitalTable.Web.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Digitaltable.Web",
+            "cwd": "${workspaceFolder}/DigitalTable.Web",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

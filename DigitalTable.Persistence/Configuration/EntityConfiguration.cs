@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using DigitalTable.Domain.Entities;
-using DigitalTable.Persistence.Infrastructure;
+using DigitalTable.Infrastructure;
 using Newtonsoft.Json;
 
 namespace DigitalTable.Persistence.Configurations

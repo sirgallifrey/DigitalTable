@@ -4,7 +4,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using OneOf;
 
-namespace DigitalTable.Web.Converters
+namespace DigitalTable.Infrastructure
 {
     public class OneOfJsonConverter : JsonConverter
     {
@@ -19,9 +19,13 @@ namespace DigitalTable.Web.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            //throw new NotImplementedException();
-			return existingValue;
+            throw new NotImplementedException();
         }
+
+		public override bool CanRead
+		{
+			get { return false; }
+		}
 
         public override bool CanConvert(Type objectType)
         {

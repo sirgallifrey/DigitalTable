@@ -10,7 +10,7 @@ using DigitalTable.Persistence;
 using Microsoft.OpenApi.Models;
 using DigitalTable.Web.Services;
 using AutoMapper;
-using DigitalTable.Web.Converters;
+using DigitalTable.Infrastructure;
 
 namespace DigitalTable.Web
 {

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalTable.Domain\DigitalTable.Domain.csproj" />
+	<ProjectReference Include="..\DigitalTable.Infrastructure\DigitalTable.Infrastructure.csproj" />
     <ProjectReference Include="..\DigitalTable.Persistence\DigitalTable.Persistence.csproj" />
   </ItemGroup>
 
