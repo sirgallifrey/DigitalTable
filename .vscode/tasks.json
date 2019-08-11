@@ -1,42 +1,73 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/DigitalTable.Web/DigitalTable.Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/DigitalTable.Web/DigitalTable.Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/DigitalTable.Web/DigitalTable.Web.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        }
-    ]
+		
+		{
+			"label": "publish",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"publish",
+				"${workspaceFolder}/DigitalTable.Web/DigitalTable.Web.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "watch",
+			"dependsOn": ["start:psql", "watch:server:client"],
+			"dependsOrder": "sequence",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+			}
+		},
+		{
+			"label": "watch:server:client",
+			"dependsOn": ["server:watch", "client:watch"],
+			"dependsOrder": "parallel",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+			}
+		},
+		{
+			"label": "start:psql",
+			"command": "docker-compose",
+			"type": "process",
+			"args": [
+				"up",
+				"-d"
+			],
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "silent"
+			}
+		},
+		{
+			"label": "server:watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"watch",
+				"--project",
+				"DigitalTable.Web/DigitalTable.Web.csproj",
+				"run"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "client:watch",
+			"command": "yarn",
+			"type": "process",
+			"options": {
+				"cwd": "${workspaceFolder}/DigitalTable.Web/ClientApp"
+			},
+			"args": [
+				"start"
+			],
+			"problemMatcher": []
+		}
+	]
 }
