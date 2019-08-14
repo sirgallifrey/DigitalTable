@@ -1,7 +1,6 @@
 
 using AutoMapper;
-using DigitalTable.Domain.Entities;
-using DigitalTable.Web.Models.Character;
+using DigitalTable.Web.Models.Entity;
 
 namespace DigitalTable.Web.Models
 {
@@ -9,8 +8,11 @@ namespace DigitalTable.Web.Models
 	{
 		public ModelsProfile()
 		{
-			CreateMap<Entity, UpsertCharacter>();
-			CreateMap<UpsertCharacter, Entity>();
+			CreateMap<DigitalTable.Domain.Entities.Entity, InsertEntity>();
+			CreateMap<InsertEntity, DigitalTable.Domain.Entities.Entity>();
+
+			CreateMap<DigitalTable.Domain.Entities.Entity, UpdateEntity>();
+			CreateMap<UpdateEntity, DigitalTable.Domain.Entities.Entity>();
 		}
 	}
 }

@@ -4,26 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DigitalTable.Domain.Entities;
-using DigitalTable.Persistence;
-using Microsoft.EntityFrameworkCore;
+using DigitalTable.Web.Models.Entity;
+using DigitalTable.Web.Services;
 
 
 namespace DigitalTable.Web.Controllers
 {
 	[Route("api/entity")]
 	[ApiController]
-	public class EntityController : Controller
+	public class CharacterController : Controller
 	{
-		private DigitalTableDbContext _context;
-		public EntityController(DigitalTableDbContext context)
+		private IEntityService _entityService;
+		//private IEntityConverter _entityConverter;
+		
+		public CharacterController(IEntityService entityService/* , IEntityConverter entityConverter*/)
 		{
-			_context = context;
+			_entityService = entityService;
+			//_entityConverter = entityConverter;
 		}
 
 		[HttpGet]
 		public async Task<ActionResult<List<Entity>>> GetEntities()
 		{
-			var entity = await _context.Entities.ToListAsync();
+			var entity = await _entityService.GetEntities();
 
 			if (entity == null)
 			{
@@ -36,7 +39,7 @@ namespace DigitalTable.Web.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Entity>> GetEntityById(int id)
 		{
-			var entity = await _context.Entities.FindAsync(id);
+			var entity = await _entityService.GetEntity(id);
 
 			if (entity == null)
 			{
@@ -47,26 +50,23 @@ namespace DigitalTable.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<Entity>> PostEntity(Entity entity)
+		public async Task<ActionResult<Entity>> CreateEntity(InsertEntity _entity)
 		{
-			_context.Entities.Add(entity);
-			await _context.SaveChangesAsync();
+			var entity = await _entityService.CreateEntity(_entity);
 			return CreatedAtAction(nameof(GetEntityById), new { id = entity.Id }, entity);
 		}
 
-		// PUT: api/Todo/5
 		[HttpPut("{id}")]
-		public async Task<IActionResult> PutEntity(int id, Entity item)
+		public async Task<ActionResult<Entity>> UpdateEntity(int id, UpdateEntity _entity)
 		{
-			if (id != item.Id)
+			var entity = await _entityService.UpdateEntity(id, _entity);
+
+			if (entity == null)
 			{
-				return BadRequest();
+				return NotFound();
 			}
 
-			_context.Entry(item).State = EntityState.Modified;
-			await _context.SaveChangesAsync();
-
-			return NoContent();
+			return entity;
 		}
 	}
 }

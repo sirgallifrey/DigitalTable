@@ -52,7 +52,7 @@ namespace DigitalTable.Web
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "DigitalTable API", Version = "v1" });
 			});
 			services.AddAutoMapper(typeof(Startup));
-			services.AddTransient<ICharacterService, CharacterService>();
+			services.AddTransient<IEntityService, EntityService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,6 @@
+.presenter {
+	max-width: 800px;
+	margin: auto;
+	margin-top: 2rem;
+	box-shadow: 0px -3px 44px -8px rgba(30,30,30,0.75);
+}

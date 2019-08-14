@@ -41,7 +41,7 @@ namespace DigitalTable.Persistence.Configurations
 					e => JsonConvert.SerializeObject(e,
 						jsonSerializerSettings
 					),
-					e => JsonConvert.DeserializeObject(e)
+					e => JsonConvert.DeserializeObject<Properties>(e)
 				);
 
 			builder.Property(e => e.CreatedAt)

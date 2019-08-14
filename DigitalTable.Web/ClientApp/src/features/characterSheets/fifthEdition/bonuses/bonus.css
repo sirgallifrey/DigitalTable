@@ -1,0 +1,27 @@
+.wrapper {
+	grid-area: bonus;
+}
+
+.bonusWrapper + .bonusWrapper {
+	margin-top: 0.5rem;
+}
+
+.bonus {
+	display: flex;
+	align-items: center;
+}
+
+.bonusValue {
+	padding: 0.25rem;
+	flex-shrink: 1;
+}
+
+.bonusValue input {
+	max-width: 30px;
+	text-align: center;
+}
+
+.bonusTitle {
+	padding: 0.25rem;
+	flex-grow: 2;
+}

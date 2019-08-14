@@ -1,0 +1,4 @@
+.wrapper {
+	grid-area: header;
+	background-color: red;
+}
