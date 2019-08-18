@@ -12,12 +12,12 @@ namespace DigitalTable.Web.Controllers
 {
 	[Route("api/entity")]
 	[ApiController]
-	public class CharacterController : Controller
+	public class EntityController : Controller
 	{
 		private IEntityService _entityService;
 		//private IEntityConverter _entityConverter;
 		
-		public CharacterController(IEntityService entityService/* , IEntityConverter entityConverter*/)
+		public EntityController(IEntityService entityService/* , IEntityConverter entityConverter*/)
 		{
 			_entityService = entityService;
 			//_entityConverter = entityConverter;
@@ -37,7 +37,7 @@ namespace DigitalTable.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Entity>> GetEntityById(int id)
+		public async Task<ActionResult<Entity>> GetEntityById(Guid id)
 		{
 			var entity = await _entityService.GetEntity(id);
 
@@ -57,7 +57,7 @@ namespace DigitalTable.Web.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult<Entity>> UpdateEntity(int id, UpdateEntity _entity)
+		public async Task<ActionResult<Entity>> UpdateEntity(Guid id, UpdateEntity _entity)
 		{
 			var entity = await _entityService.UpdateEntity(id, _entity);
 

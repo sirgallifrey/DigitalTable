@@ -2,7 +2,7 @@ import { EntityType } from './entityType';
 import { IProperties } from './properties'
 
 export interface IEntity {
-    id: number;
+    id: string;
     name: string;
     description: string;
     type: EntityType;

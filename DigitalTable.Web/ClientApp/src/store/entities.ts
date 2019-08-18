@@ -13,25 +13,25 @@ export interface IAddEntity {
 }
 
 export interface IUpdateEntityAttributePayload {
-	entityId: number,
+	entityId: string,
 	attributeId: string,
 	attribute: Attribute
 }
 
 export interface IAddEntityIndexedAttributePayload {
-	entityId: number,
+	entityId: string,
 	indexId: string,
 	attribute: Attribute
 }
 
 export interface IRemoveEntityIndexedAttributePayload {
-	entityId: number,
+	entityId: string,
 	indexId: string,
 	attributeId: string
 }
 
 export interface IEntitiesModel {
-	entitiesMap: Record<number, IEntity>,
+	entitiesMap: Record<string, IEntity>,
 	//thunks
 	createEntity: Thunk<IEntitiesModel, IAddEntity>,
 	saveEntity: Thunk<IEntitiesModel, IEntity>,

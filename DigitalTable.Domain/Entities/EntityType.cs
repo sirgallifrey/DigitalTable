@@ -10,5 +10,11 @@ namespace DigitalTable.Domain.Entities
 		Monster = 5,
 		Place = 6,
 		Note = 7,
+		Feat = 8,
+		Trait = 9,
+		Table = 10,
+		Info = 11,
+		Weapon = 12,
+		Deity = 13
 	}
 }

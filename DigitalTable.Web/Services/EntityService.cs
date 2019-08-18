@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace DigitalTable.Web.Services {
 			_context = context;
 			_mapper = mapper;
 		}
-		public async Task<Entity> GetEntity(int id) {
+		public async Task<Entity> GetEntity(Guid id) {
 			return await _context.Entities.FindAsync(id);
 		}
 		public async Task<List<Entity>> GetEntities() {
@@ -31,7 +32,7 @@ namespace DigitalTable.Web.Services {
 			return entity;
 		}
 
-		public async Task<Entity> UpdateEntity(int id, UpdateEntity updateEntity) {
+		public async Task<Entity> UpdateEntity(Guid id, UpdateEntity updateEntity) {
 			var entity = await GetEntity(id);
 			if (entity != null) {
 				entity.Name = updateEntity.Name;

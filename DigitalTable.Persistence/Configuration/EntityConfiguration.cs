@@ -20,7 +20,8 @@ namespace DigitalTable.Persistence.Configurations
 
 			builder.Property(e => e.Id)
 				.HasColumnName("id")
-				.ValueGeneratedOnAdd();
+				.ValueGeneratedOnAdd()
+				.HasDefaultValueSql("uuid_generate_v4()");
 
 			builder.Property(e => e.Name)
 				.HasColumnName("name")

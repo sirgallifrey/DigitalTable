@@ -21,9 +21,10 @@ namespace DigitalTable.Persistence.Migrations
 
             modelBuilder.Entity("DigitalTable.Domain.Entities.Entity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -31,7 +32,7 @@ namespace DigitalTable.Persistence.Migrations
                         .HasColumnType("timestamp")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnName("deleted_at")
                         .HasColumnType("timestamp");
 
