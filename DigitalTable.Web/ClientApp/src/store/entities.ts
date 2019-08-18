@@ -1,11 +1,14 @@
 import { IEntity } from 'src/domain/entities/entity';
+import { EntityType } from 'src/domain/entities/entityType';
 import { IProperties } from 'src/domain/entities/properties';
 import { Attribute } from 'src/domain/entities/attribute';
 import { Action, action, Thunk, thunk } from 'easy-peasy';
+import { createEntity, updateEntity } from 'src/api/entityClient';
 
 export interface IAddEntity {
 	name: string,
-	description: string | undefined,
+	description: string,
+	type: EntityType,
 	properties: IProperties
 }
 
@@ -44,10 +47,16 @@ export const entitiesModel: IEntitiesModel = {
 	entitiesMap: {},
 	//thunks
 	createEntity: thunk(async (actions, payload) => {
-
+		const entity = await createEntity(payload);
+		actions.addEntity(entity);
 	}),
 	saveEntity: thunk(async (actions, payload) => {
-
+		const entity = await updateEntity(payload.id, {
+			name: payload.name,
+			description: payload.description,
+			properties: payload.properties
+		});
+		actions.addEntity(entity);
 	}),
 	//actions
 	addEntity: action((state, payload) => {

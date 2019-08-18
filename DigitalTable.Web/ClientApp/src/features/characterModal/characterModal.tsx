@@ -3,6 +3,9 @@ import { CharacterList } from 'src/features/characterList/characterList';
 
 export function CharacterModal() {
 
+	const [name, setName] = React.useState('');
+	const [description, setDescription] = React.useState('');
+
 	return (
 		<div>
 			<CharacterList/>

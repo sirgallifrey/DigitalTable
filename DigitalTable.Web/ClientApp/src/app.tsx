@@ -6,9 +6,11 @@ import { CharacterModal } from 'src/features/characterModal/characterModal';
 
 export function App () {
 	return (
-		// <CharacterSheetPresenter>
-		// 	<SheetLayout/>
-		// </CharacterSheetPresenter>
+		<>
+		<CharacterSheetPresenter>
+			<SheetLayout/>
+		</CharacterSheetPresenter>
 		<CharacterModal/>
+		</>
 	);
 }
