@@ -1,5 +1,4 @@
-import { Action, action, Thunk, thunk } from 'easy-peasy';
-import { createEntity, updateEntity } from 'src/api/entityClient';
+import { Action, action } from 'easy-peasy';
 
 // TODO: have to think more about that....
 export enum uiState {
