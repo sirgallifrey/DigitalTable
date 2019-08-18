@@ -25,14 +25,18 @@ export function CharacterModal() {
 		<div>
 			<CharacterList/>
 			<hr/>
+			
+			<div>
+				<label>Name:
+				<input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+				</label>
+			</div>
 
-			<label>Name:
-			<input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-			</label>
-
-			<label>description:
-			<input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
-			</label>
+			<div>
+				<label>description:
+				<input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
+				</label>
+			</div>
 
 			<button onClick={createCharacter}>Add new character</button>
 		</div>

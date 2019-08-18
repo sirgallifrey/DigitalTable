@@ -1,12 +1,15 @@
 import { entitiesModel, IEntitiesModel } from './entities';
+import { UIModel, IUIModel } from './ui';
 import { createStore, createTypedHooks } from 'easy-peasy';
 
 interface IStoreModel {
 	entities: IEntitiesModel;
+	UI: IUIModel;
 }
 
 const storeModel: IStoreModel = {
-	entities: entitiesModel
+	entities: entitiesModel,
+	UI: UIModel
 }
 
 export const store = createStore(storeModel);
