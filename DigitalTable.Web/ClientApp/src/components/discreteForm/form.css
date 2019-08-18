@@ -1,0 +1,20 @@
+.editing {
+
+}
+
+.textInput {
+	border: none;
+	outline: none;
+}
+
+.textInput:hover {
+	background-color: #e8e8e8;
+}
+
+.textInput:focus, .textInput:active {
+	background-color: #e0e0e0;
+}
+
+.editing .textInput {
+	background-color: #888888;
+}

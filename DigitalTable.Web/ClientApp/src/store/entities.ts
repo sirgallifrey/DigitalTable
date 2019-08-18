@@ -1,6 +1,13 @@
-import { IEntity } from 'src/entities/entity';
-import { Attribute } from 'src/entities/attribute';
-import { Action, action } from 'easy-peasy';
+import { IEntity } from 'src/domain/entities/entity';
+import { IProperties } from 'src/domain/entities/properties';
+import { Attribute } from 'src/domain/entities/attribute';
+import { Action, action, Thunk, thunk } from 'easy-peasy';
+
+export interface IAddEntity {
+	name: string,
+	description: string | undefined,
+	properties: IProperties
+}
 
 export interface IUpdateEntityAttributePayload {
 	entityId: number,
@@ -22,6 +29,10 @@ export interface IRemoveEntityIndexedAttributePayload {
 
 export interface IEntitiesModel {
 	entitiesMap: Record<number, IEntity>,
+	//thunks
+	createEntity: Thunk<IEntitiesModel, IAddEntity>,
+	saveEntity: Thunk<IEntitiesModel, IEntity>,
+	//actions
 	addEntity: Action<IEntitiesModel, IEntity>,
 	updateEntity: Action<IEntitiesModel, IEntity>,
 	updateEntityAttribute: Action<IEntitiesModel, IUpdateEntityAttributePayload>
@@ -31,6 +42,13 @@ export interface IEntitiesModel {
 
 export const entitiesModel: IEntitiesModel = {
 	entitiesMap: {},
+	//thunks
+	createEntity: thunk(async (actions, payload) => {
+
+	}),
+	saveEntity: thunk(async (actions, payload) => {
+
+	}),
 	//actions
 	addEntity: action((state, payload) => {
 		state.entitiesMap[payload.id] = payload;
